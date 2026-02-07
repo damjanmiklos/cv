@@ -10,9 +10,12 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           root_file: main.tex
+      - name: Prepare PDF for deployment
+        run: |
+          mkdir -p public
+          mv main.pdf public/ # Verify this matches your output PDF name
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
-          publish_files: main.pdf
+          publish_dir: ./public
