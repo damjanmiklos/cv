@@ -1,0 +1,221 @@
+\documentclass[11pt,a4paper]{article}
+
+% ==========================================
+% PACKAGES & SETUP
+% ==========================================
+\usepackage[utf8]{inputenc} 
+\usepackage[T1]{fontenc}    
+\usepackage[english]{babel} 
+\usepackage[margin=1.0cm]{geometry} 
+\usepackage{helvet}         
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{fontawesome5}   
+\usepackage{paracol}        
+\usepackage{graphicx}       
+\usepackage{xcolor}         
+\usepackage{enumitem}       
+\usepackage{titlesec}       
+\usepackage{hyperref}       
+\usepackage{ragged2e}       
+
+% ==========================================
+% CUSTOM FORMATTING
+% ==========================================
+
+% Remove page numbers
+\pagestyle{empty}
+
+% Hyperlink setup
+\hypersetup{
+    unicode=true,
+    pdfnewwindow=true,
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black
+}
+
+% ==========================================
+% COLUMN CONFIGURATION
+% ==========================================
+\columnratio{0.5} 
+\setlength{\columnsep}{2em}
+
+% Formatting Section Headers
+\newcommand{\cvsection}[2]{
+    \vspace{0.3cm}
+    {\Large\bfseries #1 \hfill #2}
+    \par\vspace{0.2cm}
+    \hrule height 0.5pt \vspace{0.2cm} 
+}
+
+% ==========================================
+% CUSTOM COMMANDS
+% ==========================================
+
+% 1. Experience
+\newcommand{\cventry}[4]{
+    \begin{itemize}[leftmargin=*, label=\textbullet, nosep]
+        \item \textbf{#1} \par % Title
+        {\bfseries #2} \par    % Company/Institution
+        {\itshape #3} \par     % Date
+        \vspace{2pt}
+        #4                     % Description
+    \end{itemize}
+    \vspace{0.3cm}
+}
+
+% 2. Education
+\newcommand{\cveducation}[4]{
+    \begin{itemize}[leftmargin=*, label=\textbullet, nosep]
+        \item \textbf{#1} \par
+        {\bfseries #2} \par
+        {\itshape #3} \par
+        \vspace{2pt}
+        #4
+    \end{itemize}
+    \vspace{0.3cm}
+}
+
+% 3. Achievements (Other)
+\newcommand{\cvachievement}[2]{
+    \begin{itemize}[leftmargin=*, label=\textbullet, nosep]
+        \item \textbf{#1} \par
+        \vspace{2pt}
+        #2
+    \end{itemize}
+    \vspace{0.3cm}
+}
+
+% Setup bullet lists to be tight
+\setlist[itemize]{leftmargin=*, noitemsep, topsep=0pt}
+
+% ==========================================
+% DOCUMENT START
+% ==========================================
+\begin{document}
+
+\RaggedRight 
+
+% --- HEADER ---
+\begin{minipage}[t]{0.65\textwidth}
+    \vspace{0pt} 
+    {\Huge\bfseries Damján MIKLÓS} \par 
+    \vspace{0.2cm}
+    {\Large\bfseries Mechatronics Engineering Student} \par
+    \vspace{0.3cm}
+    
+    \begin{tabular}{cl}
+        \faAt & \href{mailto:miklos.damjan@gmail.com}{miklos.damjan@gmail.com} \\
+        \faMobile* & +36 30 792 9424 \\
+        \faLinkedin & \href{https://www.linkedin.com/in/damjan-miklos/}{linkedin.com/in/damjan-miklos}
+    \end{tabular}
+\end{minipage}%
+\begin{minipage}[t]{0.30\textwidth}
+    \vspace{0pt} 
+    \raggedleft
+    \includegraphics[width=4cm, keepaspectratio]{high_school_crop.jpg} 
+\end{minipage}
+
+\vspace{0.2cm}
+% ----------------------------------------
+
+% --- TWO COLUMN LAYOUT ---
+\begin{paracol}{2}
+
+% ====================
+% LEFT COLUMN
+% ====================
+
+\cvsection{Experience}{\faBriefcase}
+
+\cventry{Research Assistant}
+{BME Dept. of Hydrodynamic Systems, HemoLab}
+{2024 -- Present}
+{Responsible for data analysis in aneurysm research and uncertainty quantification in simulation models using Dakota, Python and MATLAB. Built a virtual patient sampling algorithm in MATLAB.}
+
+\cventry{Online Tutor}
+{\href{https://www.superprof.hu/mechatronikus-hallgatokent-barkit-szivesen-tanitok-matek-fizikara-online-eddigi-ertekeleseim-alapjan-egyik-legjobban.html}{Superprof}}
+{2023 -- Present}
+{Delivered over 1000 online tutoring hours in Math and Physics (English/Hungarian). Consistently ranked among the top tutors nationwide based on student feedback.}
+
+\cventry{Guest Student}
+{Eötvös Loránd University (ELTE)}
+{Spring 2023}
+{Completed university-level Fourier Analysis lectures at the Faculty of Science by special permission from the teacher while attending high school.}
+
+\cvsection{Software Skills}{\faMousePointer}
+
+\textbf{Operating Systems} \\
+Windows, Linux (WSL)
+
+\vspace{0.2cm}
+
+\textbf{Engineering Software} \\
+Dakota, AutoCAD, Inventor, LabVIEW, MPLAB, Jupyter
+
+\vspace{0.2cm}
+
+\textbf{Programming Languages} \\
+MATLAB, Python, C, C++, R, Wolfram Mathematica, Solidity
+
+\cvsection{Languages \& Competencies}{\faLanguage}
+
+\textbf{English:} C1 Professional Working Proficiency \\
+\textbf{German:} B2 Intermediate\\
+\textbf{Hungarian:} Native
+
+\vspace{0.2cm}
+
+\textbf{Driving License:} Category B
+
+
+\switchcolumn 
+
+% ====================
+% RIGHT COLUMN
+% ====================
+
+\cvsection{Education}{\faBook}
+
+\cveducation{BSc in Mechatronics Engineering}
+{Budapest University of Technology and Economics (BME)}
+{2023 -- Present}
+{Faculty of Mechanical Engineering \\
+\textit{Specialization:} Analysis of Mechatronic Structures \\
+\textit{Track:} Advanced Mathematics Program}
+
+\cveducation{High School Diploma}
+{ELTE Trefort Ágoston High School}
+{2017 -- 2023}
+{Specialization in Mathematics, Physics, and English}
+
+\cvsection{Awards \& Research}{\faMedal}
+
+\cvachievement
+{1st Place -- Scientific Students' Conference 2025 (TDK Research Paper)}
+{\textit{BME Faculty of Mechanical Engineering} \par
+Paper: "Evaluating uncertainty quantification methods in a simplified aneurysm model" \par
+\textit{+ GHK Special Award}}
+
+\cvachievement
+{1st Place -- Scientific Students' Conference 2024 (TDK Research Paper)}
+{\textit{BME Faculty of Economic and Social Sciences} \par
+Paper: "Irrationality in skewness preferences" \par
+\textit{+ Morgan Stanley Best Paper on Economic Topics Award} \par
+\textit{+ 3rd Place at National OTDK Finals 2025}}
+
+\cvachievement
+{3rd Place -- Keba Competition}
+{\textit{2023, National Economics round}}
+
+\vspace{0.2cm}
+
+\cvsection{Hobbies}{\faBicycle}
+
+\textbf{Cycling:} Ultra-endurance \\
+\textbf{Tech:} Overclocking, Hardware enthusiast \\
+\textbf{DIY:} Built a garden house
+
+\end{paracol}
+\end{document}
