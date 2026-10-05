@@ -13,7 +13,6 @@
 \usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage{fontawesome5}
-\usepackage{paracol}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{enumitem}
@@ -43,13 +42,16 @@
 % ==========================================
 % COLUMN CONFIGURATION
 % ==========================================
-% Narrow sidebar for short lists, wide main column for entries with bullets
-\columnratio{0.29}
-\setlength{\columnsep}{1.4em}
+% Narrow sidebar for short lists, wide main column for entries with bullets.
+% Both columns are full-height minipages whose section gaps stretch, so the
+% two columns always end at the bottom of the page.
+\newlength{\sidewidth}\setlength{\sidewidth}{0.27\textwidth}
+\newlength{\colgap}\setlength{\colgap}{1.3em}
+\newlength{\mainwidth}\setlength{\mainwidth}{\dimexpr\textwidth-\sidewidth-\colgap\relax}
 
 % Section header: accent-coloured title with a thin rule
 \newcommand{\cvsection}[1]{%
-    \vspace{0.32cm}%
+    \vspace{0.25cm plus 1fill}%
     {\color{accent}\large\bfseries #1}\par\vspace{0.06cm}%
     {\color{accent}\hrule height 0.6pt}\vspace{0.16cm}%
 }
@@ -61,21 +63,24 @@
 % CUSTOM COMMANDS
 % ==========================================
 
-% Entry: {Title}{Date}{Institution}{Body}
+% Entry: {Title}{Date}{Context}{Body}
 \newcommand{\cventry}[4]{%
     {\bfseries #1}\hfill{\small\color{subtle}#2}\par
     {\itshape #3}\par
     \vspace{1pt}%
     #4%
-    \par\vspace{0.2cm}%
+    \par\vspace{0.12cm plus 0.5fill}%
 }
 
-% Dated list line: {Year}{Text}, year in a fixed-width left gutter
-\newcommand{\cvaward}[2]{%
-    \item[{\small\color{subtle}#1}] #2
+% One-line entry: {Title and place}{Date}
+\newcommand{\cvline}[2]{%
+    #1\hfill{\small\color{subtle}#2}\par
 }
-\newenvironment{datedlist}{%
-    \begin{itemize}[leftmargin=2.6em, labelwidth=2.2em, labelsep=0.4em, align=left]%
+
+% Results of a project (talks, awards, publications), set apart from the
+% bullet points describing the work itself
+\newenvironment{outcomes}{%
+    \begin{itemize}[label={\color{accent}\small\faCaretRight}, leftmargin=1em, topsep=2pt]%
 }{\end{itemize}}
 
 \setlist[itemize]{leftmargin=1em, label={\color{accent}\textbullet}, noitemsep, topsep=1pt, parsep=0pt}
@@ -84,23 +89,23 @@
 % DOCUMENT START
 % ==========================================
 \begin{document}
+\fontsize{10.5}{12.9}\selectfont
 
 \RaggedRight
-
-\begin{paracol}{2}
+\noindent
+\begin{minipage}[t][\dimexpr\textheight-12pt\relax][s]{\sidewidth}\vspace{0pt}
+\hyphenpenalty=10000\exhyphenpenalty=10000
 
 % ====================
 % LEFT COLUMN (sidebar)
 % ====================
 
 \begin{center}
-    \includegraphics[width=3.3cm, keepaspectratio]{profile_pic.jpg}
+    \includegraphics[width=3.0cm, keepaspectratio]{profile_pic.jpg}
 \end{center}
 
-\vspace{0.1cm}
-
 {\small
-\begin{tabular}{@{}c@{\hspace{0.5em}}l@{}}
+\begin{tabular}{@{}c@{\hspace{0.45em}}l@{}}
     \faAt & \href{mailto:damjan.miklos@gmail.com}{damjan.miklos@gmail.com} \\
     \faMobile* & +36 30 792 9424 \\
     \faLinkedin & \href{https://www.linkedin.com/in/damjan-miklos/}{linkedin.com/in/damjan-miklos} \\
@@ -109,22 +114,35 @@
 \end{tabular}
 }
 
+\cvsection{Highlights}
+
+\begin{itemize}
+    \item Sole-author paper in a Scopus D1 journal
+    \item Oral talks at VPH 2026 and CMFF 2025
+    \item 1st Place, EELISA international competition
+    \item Two 1st places at BME student research conferences
+\end{itemize}
+
 \cvsection{Skills}
 
 \sidehead{ML \& Data}
-PyTorch, graph neural networks, image segmentation, uncertainty quantification (Dakota), SQL
+PyTorch, graph neural networks, image segmentation, SQL
 
-\vspace{0.15cm}
+\vspace{0.08cm plus 0.3fill}
+\sidehead{UQ \& Simulation}
+Polynomial chaos expansion, Gaussian processes, Dakota, VTK, PyVista
+
+\vspace{0.08cm plus 0.3fill}
 \sidehead{Programming}
-Python, MATLAB, C, C++, R, TypeScript/React, Wolfram Mathematica, Solidity
+Python, MATLAB, C, C++, R, TypeScript, Mathematica, Solidity
 
-\vspace{0.15cm}
+\vspace{0.08cm plus 0.3fill}
 \sidehead{Engineering}
 AutoCAD, Inventor, LabVIEW, MPLAB
 
-\vspace{0.15cm}
+\vspace{0.08cm plus 0.3fill}
 \sidehead{Tools}
-Git, Linux (WSL), HPC, Jupyter, \LaTeX
+Git, Linux, Slurm (HPC), Docker, Jupyter, \LaTeX
 
 \cvsection{Languages}
 
@@ -133,6 +151,10 @@ Git, Linux (WSL), HPC, Jupyter, \LaTeX
 \textbf{German:} B2 \\
 \textbf{French:} B1
 
+\cvsection{Other}
+
+Driving licence (category B)
+
 \cvsection{Interests}
 
 Ultra-endurance cycling \\
@@ -140,8 +162,9 @@ Drumming \\
 PC hardware \& overclocking \\
 DIY -- built a garden house
 
-
-\switchcolumn
+\end{minipage}%
+\hspace{\colgap}%
+\begin{minipage}[t][\dimexpr\textheight-12pt\relax][s]{\mainwidth}\vspace{0pt}
 
 % ====================
 % RIGHT COLUMN (main)
@@ -159,58 +182,57 @@ DIY -- built a garden house
 {Budapest University of Technology and Economics (BME)}
 {GPA: \textbf{4.7/5} \quad$\cdot$\quad Advanced Mathematics Program \quad$\cdot$\quad Specialization: Analysis of Mechatronic Structures}
 
-\textbf{Guest Student}, ELTE Faculty of Science \hfill{\small\color{subtle}Spring 2023}\par
-Fourier Analysis lectures by special permission while in high school\par
-\vspace{0.2cm}
-\textbf{High School Diploma}, ELTE Trefort Ágoston High School \hfill{\small\color{subtle}2017 -- 2023}\par
-Specialization in Mathematics, Physics and English\par
+\cvline{\textbf{Guest Student}, ELTE Faculty of Science (Fourier Analysis)}{2023}
+\vspace{0.06cm}
+\cvline{\textbf{High School Diploma}, ELTE Trefort Ágoston High School}{2023}
 
-\cvsection{Publications \& Presentations}
+\cvsection{Research Projects}
 
-\textbf{Miklós, D.} (2026). Irrationality in skewness preferences. \textit{Finance Research Letters}, 109, 110514.
-\href{https://doi.org/10.1016/j.frl.2026.110514}{doi:10.1016/j.frl.2026.110514}
-\textit{-- sole author, Scopus D1 journal}
-
-\vspace{0.12cm}
-\textbf{Oral presentation}, VPH 2026 Conference (Virtual Physiological Human), Milan\par
-\textbf{Oral presentation}, CMFF 2025 (Conference on Modelling Fluid Flow), Budapest\par
-{\small\color{subtle}Both talks: comparison of uncertainty quantification methods for aneurysm hemodynamics}
-
-\cvsection{Research Experience}
-
-\cventry{Research Assistant}{Nov 2024 -- present}
-{BME Department of Hydrodynamic Systems}
+\cventry{Uncertainty Quantification for Aneurysm Hemodynamics}{Nov 2024 -- present}
+{Research Assistant, BME Department of Hydrodynamic Systems}
 {\begin{itemize}
-    \item Developing a conditional generative graph neural network that creates anatomically accurate internal carotid artery (ICA) meshes with aneurysms from a single condition vector, including cleaning and preprocessing of high-resolution meshes in Python \textit{(BSc thesis)}
-    \item Developing a neural network for segmenting calcified ICAs
-    \item Compared uncertainty quantification methods for aneurysm hemodynamics simulations using Dakota, Python and MATLAB
+    \item Compared uncertainty quantification methods, including polynomial chaos expansion (PCE) and Gaussian processes, for aneurysm blood-flow simulations using Dakota, Python and MATLAB
+    \item Developed a semi-analytical framework that constructs orthogonal polynomials for PCE under truncated, correlated normal input distributions
     \item Built an efficient virtual patient sampling algorithm in MATLAB
-\end{itemize}}
+\end{itemize}
+\begin{outcomes}
+    \item \textbf{Oral presentations} at VPH 2026 (Virtual Physiological Human), Milan, and CMFF 2025, Budapest
+    \item \textbf{1st Place}, EELISA Scientific Student Competition 2026, Madrid (international)
+    \item \textbf{1st Place} + GHK Special Award, BME Scientific Students' Conference 2025
+\end{outcomes}}
 
-\cventry{Independent Research, Empirical Finance}{2024 -- 2026}
-{BME Department of Finance}
+\cventry{Generative Graph Neural Network for Carotid Artery Anatomies}{2025 -- present}
+{BSc thesis, BME Department of Hydrodynamic Systems}
+{\begin{itemize}
+    \item Developing a conditional generative graph neural network that creates anatomically accurate internal carotid artery (ICA) meshes with aneurysms from a single condition vector
+    \item Built the cleaning and preprocessing pipeline for high-resolution ICA meshes in Python (VTK, PyVista)
+    \item Developing a neural network for segmenting calcified ICAs
+\end{itemize}
+\begin{outcomes}
+    \item \textbf{xxx Place}, BME Scientific Students' Conference 2026
+\end{outcomes}}
+
+\cventry{Irrationality in Skewness Preferences}{2024 -- 2026}
+{Independent research, BME Department of Finance}
 {\begin{itemize}
     \item Built a model-independent, distribution-based benchmark showing that the equity skewness premium exceeds its rational upper bound, pointing to behavioural drivers
-\end{itemize}}
-
-\cvsection{Selected Awards}
-
-\begin{datedlist}
-    \cvaward{2026}{\textbf{1st Place}, EELISA Scientific Student Competition, Madrid (international)}
-    \cvaward{2026}{\textbf{xxx Place}, BME Scientific Students' Conference -- generative GNN}
-    \cvaward{2025}{\textbf{1st Place} + GHK Special Award, BME Scientific Students' Conference -- UQ}
-    \cvaward{2025}{\textbf{3rd Place}, National Scientific Students' Conference (OTDK) -- finance}
-    \cvaward{2024}{\textbf{1st Place} + Morgan Stanley Award, BME Scientific Students' Conference}
-\end{datedlist}
+\end{itemize}
+\begin{outcomes}
+    \item \textbf{Published:} Miklós, D. (2026). \textit{Finance Research Letters}, 109, 110514. \href{https://doi.org/10.1016/j.frl.2026.110514}{doi:10.1016/j.frl.2026.110514} -- sole author, Scopus D1 journal
+    \item \textbf{1st Place} + Morgan Stanley Award, BME Scientific Students' Conference 2024
+    \item \textbf{3rd Place}, National Scientific Students' Conference (OTDK) 2025
+\end{outcomes}}
 
 \cvsection{Other Experience \& Projects}
 
-\textbf{Online Math \& Physics Tutor}, \href{https://www.superprof.hu/mechatronikus-hallgatokent-barkit-szivesen-tanitok-matek-fizikara-online-eddigi-ertekeleseim-alapjan-egyik-legjobban.html}{Superprof} \hfill{\small\color{subtle}2023 -- present}\par
-2000+ hours of university-level tutoring in English and Hungarian; among the top-rated tutors nationwide\par
-\vspace{0.2cm}
+\cventry{Online Math \& Physics Tutor}{2023 -- present}
+{\href{https://www.superprof.hu/mechatronikus-hallgatokent-barkit-szivesen-tanitok-matek-fizikara-online-eddigi-ertekeleseim-alapjan-egyik-legjobban.html}{Superprof}}
+{2000+ hours of university-level tutoring in English and Hungarian; among the top-rated tutors nationwide}
 
-\textbf{\href{https://github.com/damjanmiklos/dynamicspeed-for-youtube}{DynamicSpeed for YouTube}} \hfill{\small\color{subtle}2026}\par
-Chrome/Firefox extension that matches playback speed to a target words-per-minute\par
+\cventry{\href{https://github.com/damjanmiklos/dynamicspeed-for-youtube}{DynamicSpeed for YouTube}}{2026}
+{Browser extension for Chrome and Firefox}
+{Matches playback speed to a target words-per-minute estimated from captions}
 
-\end{paracol}
+\end{minipage}
+
 \end{document}
