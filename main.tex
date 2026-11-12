@@ -6,7 +6,6 @@
 % ==========================================
 % PACKAGES & SETUP
 % ==========================================
-\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
 \usepackage[margin=1.0cm]{geometry}
@@ -16,8 +15,8 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{enumitem}
-\usepackage{hyperref}
 \usepackage{ragged2e}
+\usepackage{microtype} 
 
 % ==========================================
 % CUSTOM FORMATTING
@@ -28,16 +27,7 @@
 \definecolor{accent}{RGB}{0,62,116}
 \definecolor{subtle}{RGB}{90,90,90}
 
-\hypersetup{
-    unicode=true,
-    pdfnewwindow=true,
-    colorlinks=true,
-    linkcolor=black,
-    citecolor=black,
-    urlcolor=accent,
-    pdftitle={Damján Miklós -- CV},
-    pdfauthor={Damján Miklós}
-}
+
 
 % ==========================================
 % COLUMN CONFIGURATION
@@ -85,11 +75,26 @@
 
 \setlist[itemize]{leftmargin=1em, label={\color{accent}\textbullet}, noitemsep, topsep=1pt, parsep=0pt}
 
+\usepackage{hyperref}
+\hypersetup{
+    unicode=true,
+    pdfnewwindow=true,
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=accent,
+    pdftitle={Damján Miklós -- CV},
+    pdfauthor={Damján Miklós},
+    pdfdisplaydoctitle=true,
+    pdfsubject={Damján Miklós -- CV}
+}
+
 % ==========================================
 % DOCUMENT START
 % ==========================================
 \begin{document}
-\fontsize{10.5}{12.9}\selectfont
+\input{glyphtounicode}\pdfgentounicode=1
+\fontsize{10.5}{12.4}\selectfont
 
 \RaggedRight
 \noindent
@@ -101,7 +106,7 @@
 % ====================
 
 \begin{center}
-    \includegraphics[trim=1.5cm 7cm 1.5cm 1cm, clip, width=4.5cm, keepaspectratio]{profile_pic.jpg}
+    \includegraphics[trim=0.42cm 1.98cm 0.42cm 0.28cm, clip, width=4.5cm, keepaspectratio]{profile_pic.jpg}
 \end{center}
 
 {\small
@@ -127,7 +132,7 @@
 \cvsection{Skills}
 
 \sidehead{ML \& Data}
-PyTorch, graph neural networks, image segmentation, Bayesian methods, SQL
+PyTorch, Tensorflow, graph neural networks, image segmentation, Bayesian methods, SQL
 
 \vspace{0.08cm plus 0.3fill}
 \sidehead{UQ \& Simulation}
@@ -139,7 +144,7 @@ Python, MATLAB, C, C++, R, TypeScript, Mathematica
 
 \vspace{0.08cm plus 0.3fill}
 \sidehead{Engineering}
-AutoCAD, Inventor, LabVIEW, MPLAB
+AutoCAD, Inventor, LabVIEW
 
 \vspace{0.08cm plus 0.3fill}
 \sidehead{Tools}
@@ -183,7 +188,7 @@ DIY: built a garden house
 
 \cvline{\textbf{Guest Student}, ELTE Faculty of Science (Fourier Analysis university lectures during high school)}{2023}
 \vspace{0.06cm}
-\cvline{\textbf{High School Diploma}, ELTE Trefort Ágoston High School}{2017--2023}
+\cvline{\textbf{High School Diploma}, ELTE Trefort Ágoston High School}{2017 -- 2023}
 
 
 \cvsection{Research}
@@ -196,9 +201,9 @@ DIY: built a garden house
     \item Built an efficient virtual patient sampling algorithm in MATLAB
 \end{itemize}
 \begin{outcomes}
-    \item \textbf{Oral presentations} at \href{https://vph-conference.org/wp-content/uploads/sites/30/2026/08/VPH-2026-Abstract-book_reduced.pdf\#page=493}{VPH 2026} (Virtual Physiological Human), Milan, and CMFF 2025, Budapest \quad ·\quad part of \href{https://cordis.europa.eu/project/id/101136438}{GEMINI}
-    \item \textbf{1st Place}, \href{https://scientific.eelisa.bme.hu/conference/EELISA/2026/sessions/gggfd/paper/Evaluating-uncertainty-quantification-methods}{EELISA} Scientific Competition 2026, Madrid {\small\color{subtle} \;·\; Biomedical section}
-    \item \textbf{1st Place}, GHK Special Award, BME Scientific Students' Conference \href{https://tdk.bme.hu/ConferenceFiles/GPK/2025/Paper/Szamitasi-bizonytalansagok-szamszerusitese-egy-20251109-161003.pdf?paperId=16818}{(TDK)} 2025{\small\color{subtle} \;·\; Fluid Dynamics section}
+    \item \textbf{Oral presentations} at \href{https://vph-conference.org/wp-content/uploads/sites/30/2026/08/VPH-2026-Abstract-book_reduced.pdf\#page=493}{VPH 2026} (Virtual Physiological Human), Milan, and CMFF 2025, Budapest \quad $\cdot$ \quad part of \href{https://cordis.europa.eu/project/id/101136438}{GEMINI}
+    \item \textbf{1st Place}, \href{https://scientific.eelisa.bme.hu/conference/EELISA/2026/sessions/gggfd/paper/Evaluating-uncertainty-quantification-methods}{EELISA} Scientific Competition 2026, Madrid {\small\color{subtle} \;$\cdot$\; Biomedical section}
+    \item \textbf{1st Place}, GHK Special Award, BME Scientific Students' Conference \href{https://tdk.bme.hu/ConferenceFiles/GPK/2025/Paper/Szamitasi-bizonytalansagok-szamszerusitese-egy-20251109-161003.pdf?paperId=16818}{(TDK)} 2025{\small\color{subtle} \;$\cdot$\; Fluid Dynamics section}
 \end{outcomes}}
 
 \cventry{Generative Graph Neural Network for Carotid Artery Anatomies}{2025 -- present}
@@ -206,11 +211,11 @@ DIY: built a garden house
 {\begin{itemize}
     \item Developed a conditional generative graph neural network that creates anatomically accurate internal carotid artery (ICA) meshes with aneurysms from a single condition vector
     \item Built the cleaning and data processing pipeline for high-resolution ICA meshes in Python (VTK, PyVista)
-    \item Trained on Komondor, Hungary's national supercomputer, under a successfully awarded computing grant to my research.
+    \item Trained on Komondor, Hungary's national supercomputer, under a successfully awarded computing grant to my research
     \item Developing a neural network for segmenting calcified ICAs
 \end{itemize}
 \begin{outcomes}
-    \item \textbf{xxx Place}, BME TDK 2026{\small\color{subtle} \;·\; Neural Networks section}
+    \item \textbf{xxx Place}, BME TDK 2026{\small\color{subtle} \;$\cdot$\; Neural Networks section}
 \end{outcomes}}
 
 \cventry{Irrationality in Skewness Preferences}{2023 -- 2026}
@@ -221,13 +226,14 @@ DIY: built a garden house
 \end{itemize}
 \begin{outcomes}
     \item \textbf{Published:} Miklós, D. (2026). \textit{Finance Research Letters}, 109, 110514. \href{https://doi.org/10.1016/j.frl.2026.110514}{doi:10.1016/j.frl.2026.110514} -- sole author, \href{https://www.scopus.com/sourceid/15519}{Scopus D1} journal
-    \item \textbf{1st Place}, Morgan Stanley Award, BME TDK 2024{\small\color{subtle} \;·\; Finance section}
+    \item \textbf{1st Place}, Morgan Stanley Award, BME TDK 2024{\small\color{subtle} \;$\cdot$\; Finance section}
     \item \textbf{3rd Place}, National Scientific Students' Conference (OTDK) 2025
 \end{outcomes}}
 
 \cvsection{Other Experience \& Projects}
 
 \cventry{Online Math \& Physics Tutor {\href{https://www.superprof.hu/mechatronikus-hallgatokent-barkit-szivesen-tanitok-matek-fizikara-online-eddigi-ertekeleseim-alapjan-egyik-legjobban.html}{Superprof}}}{2023 -- present}
+{}
 {2000+ hours of university and high school-level tutoring in English and Hungarian; among the top-rated tutors nationwide}
 
 \cventry{DynamicSpeed for YouTube \href{https://github.com/damjanmiklos/dynamicspeed-for-youtube}{\faGithub} \href{https://chromewebstore.google.com/detail/dynamicspeed-for-youtube/hpbgddpjofgkedekcmkjannepmnfbpga}{\faChrome}}{2026} 
